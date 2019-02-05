@@ -1,0 +1,22 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.3.0",
+    "props": {
+      "location": "path",
+      "appName": "hybrid front",
+      "target": ["web"],
+      "pwa": true,
+      "ui": "material",
+      "layout": "simple",
+      "auth": true,
+      "lazy": true,
+      "angulartics": true,
+      "analyticsProvider": "ga",
+      "googleAnalyticsAccount": "UA-132926027-1",
+      "prettier": true,
+      "projectName": "hybrid-front",
+      "packageManager": "yarn",
+      "mobile": []
+    }
+  }
+}
