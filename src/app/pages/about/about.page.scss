@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    .container {
+        display: flex;
+        flex: 1;
+        .main-bar {
+            flex: 1;
+            > video {
+                width: 100%;
+                vertical-align: middle;
+                height: 100%;
+                background: #202020;
+            }
+        }
+        .left-bar,
+        .right-bar {
+            overflow: hidden;
+            display: block;
+            flex: 0 0 20vw;
+            background: #343b4a;
+        }
+        .left-bar {
+            order: -1;
+        }
+    }
+}
+

@@ -4,9 +4,15 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": []
+    "types": [
+      "node"
+    ]
   },
-  "exclude": ["test.ts", "**/*.spec.ts", "**/*.mock.ts"],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "**/*.mock.ts"
+  ],
   "angularCompilerOptions": {
     "preserveWhitespaces": true
   }

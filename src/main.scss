@@ -4,7 +4,7 @@
  */
 
 // Theme variables, must be included before the libraries to allow overriding defaults
-@import "theme/theme-variables";
+@import "style/theme-variables";
 
 // 3rd party libraries
 @import "~material-design-icons-iconfont/dist/fonts/material-icons.css";
@@ -24,4 +24,4 @@
 @include angular-material-theme($app-theme);
 
 // Theme customization
-@import "theme/theme";
+@import "style/theme";

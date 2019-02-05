@@ -2,12 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { MaterialModule } from '@app/shared/material.module';
-import { LoaderComponent } from './loader/loader.component';
+import {MaterialModule} from "@shared/material.module";
+import {LoaderComponent} from "@components/loader/loader.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  imports: [FlexLayoutModule, MaterialModule, CommonModule],
-  declarations: [LoaderComponent],
-  exports: [LoaderComponent]
+    imports: [
+        TranslateModule.forChild(),
+        FlexLayoutModule,
+        MaterialModule,
+        CommonModule
+    ],
+    declarations: [
+        LoaderComponent
+    ],
+    exports: [
+        TranslateModule,
+        CommonModule,
+        LoaderComponent,
+        MaterialModule,
+    ]
 })
 export class SharedModule {}

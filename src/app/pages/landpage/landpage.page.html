@@ -1,0 +1,21 @@
+<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+    <div>
+        <h1 fxLayoutAlign="center" translate>APP_NAME</h1>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+            <h4 class="version">v{{ version }}</h4>
+            <div class="language-selector">
+                <button mat-raised-button color="primary" [matMenuTriggerFor]="languageMenu">
+                    {{ currentLanguage }}
+                </button>
+                <mat-menu #languageMenu="matMenu">
+                    <button mat-menu-item *ngFor="let language of languages" (click)="setLanguage(language)">
+                        {{ language }}
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+    <div class="login-error" translate>
+        Username or password incorrect.
+    </div>
+</div>
