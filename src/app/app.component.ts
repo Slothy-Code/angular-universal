@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
-import {Angulartics2GoogleAnalytics} from "angulartics2/ga";
-import {Title} from "@angular/platform-browser";
-import {I18nService} from "@shared/services/i18n/i18n.service";
-import {environment} from "@env/environment";
+import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
+import {Title} from '@angular/platform-browser';
+import {I18nService} from '@shared/services/i18n/i18n.service';
+import {environment} from '@env/environment';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import {merge} from "rxjs";
+import {merge} from 'rxjs';
 
 @Component({
   selector: 'app-root',

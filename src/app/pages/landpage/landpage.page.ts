@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {I18nService} from "@shared/services/i18n/i18n.service";
-import {environment} from "@env/environment";
+import {I18nService} from '@shared/services/i18n/i18n.service';
+import {environment} from '@env/environment';
 
 @Component({
     selector: 'page-landpage',

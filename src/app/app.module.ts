@@ -1,7 +1,8 @@
-import {NgModule} from "@angular/core";
-import {AppComponent} from "./app.component";
-import {RouterModule} from "@angular/router";
-import {CoreModule} from "@shared/core.module";
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {RouterModule} from '@angular/router';
+import {CoreModule} from '@shared/core.module';
+import {AuthenticationGuard} from '@shared/guards/authentication/authentication.guard';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,9 @@ import {CoreModule} from "@shared/core.module";
     CoreModule,
     RouterModule.forRoot([
       { path: '', loadChildren: './pages/landpage/landpage.module#LandpageModule'},
-      { path: 'about', loadChildren: './pages/about/about.module#AboutModule'}
+      { path: 'login', loadChildren: './pages/login/login.module#LoginModule'},
+      { path: 'home', loadChildren: './pages/home/home.module#HomeModule', canActivate: [AuthenticationGuard]},
+      { path: 'about', loadChildren: './pages/about/about.module#AboutModule'},
     ])
   ],
   providers: [],
