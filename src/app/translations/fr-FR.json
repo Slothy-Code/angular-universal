@@ -1,7 +1,8 @@
 {
-  "APP_NAME": "hybrid front",
+  "APP_NAME": "hybrid front french",
   "About": "A propos",
   "Hello world !": "Bonjour le monde !",
+  "Nice layout": "Nice layout po francusku",
   "Home": "Accueil",
   "Logged in as": "Connecté en tant que",
   "Login": "Connexion",
@@ -12,5 +13,6 @@
   "Username is required": "Identifiant requis",
   "Username or password incorrect.": "Identifiant ou mot de passe incorrect.",
   "Remember me": "Rester connecté",
-  "Version": "Version"
+  "Version": "Version",
+  "back to landpage": "back to zelipapa"
 }
