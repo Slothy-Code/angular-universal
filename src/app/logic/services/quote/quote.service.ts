@@ -12,13 +12,14 @@ export interface RandomQuoteContext {
   category: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class QuoteService {
   constructor(private httpClient: HttpClient) {}
 
   getRandomQuote(context: RandomQuoteContext): Observable<string> {
-    return this.httpClient
-      .cache()
+    return this.httpClient.cache()
       .get(routes.quote(context))
       .pipe(
         map((body: any) => body.value),
