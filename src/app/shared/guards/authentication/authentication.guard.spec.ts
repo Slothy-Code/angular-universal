@@ -1,14 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Router, RouterStateSnapshot } from '@angular/router';
 
-import { AuthenticationService } from './authentication.service';
-import { MockAuthenticationService } from './authentication.service.mock';
+import { AuthenticationService } from '@logic/services/authentication/authentication.service';
+import { MockAuthenticationService } from '@logic/services/authentication/authentication.service.mock';
 import { AuthenticationGuard } from './authentication.guard';
 
 describe('AuthenticationGuard', () => {
   let authenticationGuard: AuthenticationGuard;
   let authenticationService: MockAuthenticationService;
-  let mockRouter: any;
+  let mockRouter;
   let mockSnapshot: RouterStateSnapshot;
 
   beforeEach(() => {
