@@ -13,7 +13,7 @@ import {ApiPrefixInterceptor} from '@shared/interceptors/http/api-prefix.interce
 import {HttpCacheService} from '@shared/interceptors/http/http-cache.service';
 import {I18nService} from '@shared/services/i18n/i18n.service';
 import {AuthenticationGuard} from '@shared/guards/authentication/authentication.guard';
-import {RouterModule} from '@angular/router';
+import {RouteReuseStrategy, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {BrowserModule} from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -22,6 +22,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {environment} from '@env/environment';
+import {RouteReusableStrategy} from '@shared/services/route-reusable-strategy';
 
 @NgModule({
   imports: [
@@ -45,6 +46,10 @@ import {environment} from '@env/environment';
       {
           provide: HttpClient,
           useClass: HttpService
+      },
+      {
+          provide: RouteReuseStrategy,
+          useClass: RouteReusableStrategy
       }
   ]
 })
