@@ -21,6 +21,7 @@ import {TranslateModule} from '@ngx-translate/core';
         CommonModule,
         LoaderComponent,
         MaterialModule,
+        FlexLayoutModule,
     ]
 })
 export class SharedModule {}

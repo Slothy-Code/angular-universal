@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {finalize} from 'rxjs/internal/operators';
 import {QuoteService} from '@logic/services/quote/quote.service';
+import {AuthenticationService} from '@logic/services/authentication/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'page-home',
@@ -12,7 +14,9 @@ export class HomePage implements OnInit {
     quote: string;
     isLoading: boolean;
 
-    constructor(private quoteService: QuoteService) {
+    constructor(private router: Router,
+                private authenticationService: AuthenticationService,
+                private quoteService: QuoteService) {
     }
 
     ngOnInit() {
@@ -27,6 +31,11 @@ export class HomePage implements OnInit {
             .subscribe((quote: string) => {
                 this.quote = quote;
             });
+    }
+
+    logout() {
+        this.authenticationService.logout()
+            .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
     }
 
 }

@@ -1,18 +1,16 @@
-:host {
-    display: flex;
-    flex: 1;
-    background-color: #f5f5f5;
+.main-section {
+    background-color: #009688;
 }
 
-.inline-loader {
-    display: inline-block;
+.primary-section {
+    background-color: #6b9696;
 }
 
-.version {
-    margin: 0;
+.secondary-section {
+    background-color: #8fa1a2;
 }
 
-.login-container,
-.mat-form-field {
-    width: 100%;
+.section {
+    height: 600px;
+
 }

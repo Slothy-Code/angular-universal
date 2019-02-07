@@ -5,18 +5,21 @@ import {CoreModule} from '@shared/core.module';
 import {AuthenticationGuard} from '@shared/guards/authentication/authentication.guard';
 import {extract} from '@shared/services/i18n/i18n.service';
 
+const routes = [
+  { path: '', loadChildren: './pages/landpage/landpage.module#LandpageModule', data: { title: extract('Landpage') }},
+  { path: 'login', loadChildren: './pages/login/login.module#LoginModule', data: { title: extract('Login') }},
+  { path: 'home', loadChildren: './pages/home/home.module#HomeModule',
+    data: { title: extract('Login') }, canActivate: [AuthenticationGuard]},
+  { path: 'about', loadChildren: './pages/about/about.module#AboutModule', data: { title: extract('About') }},
+]
+
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
     CoreModule,
-    RouterModule.forRoot([
-      { path: '', loadChildren: './pages/landpage/landpage.module#LandpageModule', data: { title: extract('Login') }},
-      { path: 'login', loadChildren: './pages/login/login.module#LoginModule', data: { title: extract('Login') }},
-      { path: 'home', loadChildren: './pages/home/home.module#HomeModule', canActivate: [AuthenticationGuard], data: { title: extract('Login') }},
-      { path: 'about', loadChildren: './pages/about/about.module#AboutModule', data: { title: extract('Login') }},
-    ])
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
