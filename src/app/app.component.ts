@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
@@ -12,7 +12,7 @@ import {merge} from 'rxjs';
   selector: 'app-root',
   template: `<router-outlet></router-outlet>`
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
@@ -26,6 +26,23 @@ export class AppComponent {
 
     const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));
 
-
+    merge(this.translateService.onLangChange, onNavigationEnd)
+        .pipe(
+            map(() => {
+              let route = this.activatedRoute;
+              while (route.firstChild) {
+                route = route.firstChild;
+              }
+              return route;
+            }),
+            filter(route => route.outlet === 'primary'),
+            mergeMap(route => route.data)
+        )
+        .subscribe(event => {
+          const title = event['title'];
+          if (title) {
+            this.titleService.setTitle(this.translateService.instant(title));
+          }
+        });
   }
 }
