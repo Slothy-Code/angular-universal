@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
-import { MaterialModule } from '@app/shared/material.module';
-import { LoaderComponent } from './loader.component';
+import {LoaderComponent} from './loader.component';
+import {MaterialModule} from '@shared/material.module';
 
 describe('LoaderComponent', () => {
   let component: LoaderComponent;

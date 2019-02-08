@@ -1,9 +1,4 @@
-import {ErrorHandler, NgModule, Optional, SkipSelf} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-import {MaterialModule} from '@shared/material.module';
-import {LoaderComponent} from '@components/loader/loader.component';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {LogicModule} from '@logic/logic.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {HttpService} from '@shared/interceptors/http/http.service';
@@ -16,13 +11,14 @@ import {AuthenticationGuard} from '@shared/guards/authentication/authentication.
 import {RouteReuseStrategy, RouterModule} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {BrowserModule} from '@angular/platform-browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {Angulartics2Module} from 'angulartics2';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {environment} from '@env/environment';
 import {RouteReusableStrategy} from '@shared/services/route-reusable-strategy';
+import {PermissionGuard} from '@shared/guards/permission/permission.guard';
 
 @NgModule({
   imports: [
@@ -38,6 +34,7 @@ import {RouteReusableStrategy} from '@shared/services/route-reusable-strategy';
   ],
   providers: [
       AuthenticationGuard,
+      PermissionGuard.guards,
       I18nService,
       HttpCacheService,
       ApiPrefixInterceptor,
