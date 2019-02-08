@@ -4,9 +4,6 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular
 export class PermissionGuard {
     public static guards = [];
 
-    constructor() {
-    }
-
     public static forPermission(permission: string) {
 
         @Injectable()

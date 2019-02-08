@@ -6,14 +6,15 @@ import {AuthenticationService} from '@logic/services/authentication/authenticati
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
-  constructor(private router: Router, private authenticationService: AuthenticationService) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authenticationService.isAuthenticated()) {
-      return true;
+    constructor(private router: Router, private authenticationService: AuthenticationService) {
     }
 
-    this.router.navigate(['/login'], { queryParams: { redirect: state.url }, replaceUrl: true });
-    return false;
-  }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        if (this.authenticationService.isAuthenticated()) {
+            return true;
+        }
+
+        this.router.navigate(['/login'], {queryParams: {redirect: state.url}, replaceUrl: true});
+        return false;
+    }
 }
