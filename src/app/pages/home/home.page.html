@@ -3,8 +3,7 @@
         <div fxFlex="20" class="section main-section" fxLayout="column" >
             <button mat-button (click)="logout()" translate>Logout</button>
             <a routerLink="/" translate>back to landpage</a>
-            <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-            <q [hidden]="isLoading">{{ quote }}</q>
+            {{currentUser.name}}
         </div>
         <div fxFlex="80" class="section primary-section">
             <div class="_container-scroll">

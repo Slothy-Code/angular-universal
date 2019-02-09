@@ -19,6 +19,7 @@ import {FormsModule} from '@angular/forms';
 import {environment} from '@env/environment';
 import {RouteReusableStrategy} from '@shared/services/route-reusable-strategy';
 import {PermissionGuard} from '@shared/guards/permission/permission.guard';
+import {JwtInterceptor} from '@shared/interceptors/http/jwt.incerceptor';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {PermissionGuard} from '@shared/guards/permission/permission.guard';
       ApiPrefixInterceptor,
       ErrorHandlerInterceptor,
       CacheInterceptor,
+      JwtInterceptor,
       {
           provide: HttpClient,
           useClass: HttpService

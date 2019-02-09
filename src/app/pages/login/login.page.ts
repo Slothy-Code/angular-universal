@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {finalize} from 'rxjs/internal/operators';
+import {finalize, first} from 'rxjs/internal/operators';
 import {AuthenticationService} from '@logic/services/authentication/authentication.service';
 import {I18nService} from '@shared/services/i18n/i18n.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -28,31 +28,23 @@ export class LoginPage implements OnInit {
 
     login() {
         this.isLoading = true;
-        this.authenticationService
-            .login(this.loginForm.value)
-            .pipe(
-                finalize(() => {
-                    this.loginForm.markAsPristine();
-                    this.isLoading = false;
-                })
-            )
-            .subscribe(
-                credentials => {
-                    console.log(credentials.username, 'successfully logged in');
+        this.authenticationService.login(this.loginForm.value, this.loginForm.value.remember)
+            .pipe(first())
+            .subscribe(data => {
                     this.route.queryParams.subscribe(params =>
                         this.router.navigate([params.redirect || '/home'], { replaceUrl: true })
                     );
                 },
                 error => {
-                    console.log('Login error:', error);
+                    console.log(error);
                     this.error = error;
-                }
-            );
+                    this.isLoading = false;
+                });
     }
 
     private createForm() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            name: ['', Validators.required],
             password: ['', Validators.required],
             remember: true
         });

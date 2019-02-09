@@ -49,7 +49,6 @@ var CoreModule = /** @class */ (function () {
                 HttpClientModule
             ],
             providers: [
-                AuthenticationGuard,
                 I18nService,
                 HttpCacheService,
                 ApiPrefixInterceptor,
