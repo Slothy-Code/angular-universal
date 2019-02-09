@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '@logic/services/authentication/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '@logic/models/user';
-import {finalize} from 'rxjs/internal/operators';
 
 @Component({
     selector: 'page-home',
@@ -20,10 +19,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit() {
-        this.authenticationService.refreshToken()
-            .subscribe((data) => {
-                console.log(data);
-            });
+
     }
 
     logout() {

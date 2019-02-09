@@ -12,6 +12,8 @@ export class AuthenticationService {
   public currentUser: Observable<User>;
 
   constructor(private httpClient: HttpClient) {
+      // TODO
+      // WHEN OLD REFRESH AND ADD NEW TOKEN
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -23,7 +25,6 @@ export class AuthenticationService {
   login(form: {name: string, password: string}, remember: boolean) {
     return this.httpClient.post<User>(`${environment.serverUrl}/user/login`, form)
         .pipe(map(user => {
-          console.log('siema');
           if (user && user.token) {
             if (remember) {
               localStorage.setItem('currentUser', JSON.stringify(user));
@@ -38,7 +39,6 @@ export class AuthenticationService {
     refreshToken() {
         return this.httpClient.auth().get<User>(`${environment.serverUrl}/user/refresh-token`)
             .pipe(map(user => {
-                console.log(user);
 
                 return user;
             }));
