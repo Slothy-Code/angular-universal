@@ -1,12 +1,16 @@
 
 export interface State {
-    token: string;
-    image: string;
+    _id: string;
+    name: string;
+    permissions: string[];
+    role: string;
 }
 
 const INITIAL_STATE: State = {
-    token: null,
-    image: null
+    _id: null,
+    name: null,
+    permissions: [],
+    role: null
 };
 
 export function reducer(state: State = INITIAL_STATE, action) {

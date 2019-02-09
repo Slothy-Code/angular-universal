@@ -12,9 +12,9 @@
                         <br/>
                         <div fxLayout="column">
                             <mat-form-field>
-                                <input type="text" matInput formControlName="username" autocomplete="username"
+                                <input type="text" matInput formControlName="name" autocomplete="name"
                                        [placeholder]="'Username' | translate"/>
-                                <mat-error *ngIf="loginForm.controls.username.valid || loginForm.controls.username.untouched">
+                                <mat-error *ngIf="loginForm.controls.name.valid || loginForm.controls.name.untouched">
                                     <span translate>Username is required</span>
                                 </mat-error>
                             </mat-form-field>

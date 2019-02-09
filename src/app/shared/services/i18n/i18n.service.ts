@@ -67,7 +67,6 @@ export class I18nService {
     if (!isSupportedLanguage) {
       language = this.defaultLanguage;
     }
-    console.log(language);
     this.translateService.use(language);
   }
 
