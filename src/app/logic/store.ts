@@ -1,8 +1,9 @@
 import * as fromAuth from '@logic/reducers/auth.reducer';
 import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
+import {UserStore} from '@logic/models/user';
 
 export interface AppState {
-    auth: fromAuth.State;
+    auth: UserStore;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
