@@ -8,6 +8,7 @@ import {
     USER_LOGIN,
     USER_LOGIN_SUCCESS,
     USER_LOGOUT,
+    USER_REFRESH_TOKEN,
     USER_RESTORE_SESSION,
     UserFetchPermissions,
     UserFetchPermissionsFail,
@@ -16,6 +17,8 @@ import {
     UserLoginFail,
     UserLoginSuccess,
     UserLogout,
+    UserRefreshTokenFail,
+    UserRefreshTokenSuccess,
     UserRestoreSession
 } from '@logic/actions/auth.action';
 import {catchError, map, mergeMap, tap} from 'rxjs/operators';
@@ -35,6 +38,17 @@ export class AuthEffects {
                         catchError(error => of(new UserLoginFail(error)))
                     ))
         );
+
+    @Effect()
+    refreshToken$: Observable<Action> = this.actions$
+        .pipe(ofType(USER_REFRESH_TOKEN),
+            mergeMap((action) =>
+                this.authService.refreshToken()
+                    .pipe(mergeMap(data => [
+                            new UserRefreshTokenSuccess(data),
+                        ]),
+                        catchError(error => of(new UserRefreshTokenFail(error)))
+                    )));
 
     @Effect({dispatch: false})
     loginSuccess$: Observable<Action> = this.actions$

@@ -20,6 +20,7 @@ import {environment} from '@env/environment';
 import {RouteReusableStrategy} from '@shared/services/route-reusable-strategy';
 import {PermissionGuard} from '@shared/guards/permission/permission.guard';
 import {JwtInterceptor} from '@shared/interceptors/http/jwt.incerceptor';
+import {RefreshTokenInterceptor} from '@shared/interceptors/http/refresh-token.interceptor';
 
 @NgModule({
   imports: [
@@ -41,7 +42,9 @@ import {JwtInterceptor} from '@shared/interceptors/http/jwt.incerceptor';
       ApiPrefixInterceptor,
       ErrorHandlerInterceptor,
       CacheInterceptor,
+      {provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true},
       {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+
       {
           provide: HttpClient,
           useClass: HttpService

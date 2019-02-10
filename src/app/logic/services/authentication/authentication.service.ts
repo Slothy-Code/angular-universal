@@ -40,10 +40,10 @@ export class AuthenticationService {
     }
 
     refreshToken() {
-        return this.httpClient.auth().get<User>(`${environment.serverUrl}/user/refresh-token`)
-            .pipe(map(user => {
-
-                return user;
+        return this.httpClient.get<User>(`${environment.serverUrl}/user/refresh-token`)
+            .pipe(map(data => {
+                const decodedJWT: DecodedJWT = this.parseJwt(data.token);
+                return {name: decodedJWT.name, role: decodedJWT.role, token: {token: data.token, exp: decodedJWT.exp, iat: decodedJWT.iat}};
             }));
     }
 

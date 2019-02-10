@@ -1,10 +1,14 @@
 import {
     USER_FETCH_PERMISSIONS,
+    USER_FETCH_PERMISSIONS_FAIL,
     USER_FETCH_PERMISSIONS_SUCCESS,
     USER_LOGIN,
     USER_LOGIN_FAIL,
     USER_LOGIN_SUCCESS,
     USER_LOGOUT,
+    USER_REFRESH_TOKEN,
+    USER_REFRESH_TOKEN_FAIL,
+    USER_REFRESH_TOKEN_SUCCESS,
     USER_RESTORE_SESSION
 } from '@logic/actions/auth.action';
 
@@ -22,7 +26,7 @@ const INITIAL_STATE: State = {
     name: null,
     role: null,
     permissions: [],
-    token: {token: null, exp: 0, iat: null},
+    token: {token: null, exp: null, iat: null},
     loading: false
 };
 
@@ -31,7 +35,8 @@ export function reducer(state: State = INITIAL_STATE, action) {
 
         case USER_LOGIN:
         case USER_FETCH_PERMISSIONS:
-        case USER_RESTORE_SESSION: {
+        case USER_RESTORE_SESSION:
+        case USER_REFRESH_TOKEN: {
             return {
                 ...state,
                 loading: true
@@ -39,7 +44,8 @@ export function reducer(state: State = INITIAL_STATE, action) {
         }
 
         case USER_LOGIN_SUCCESS:
-        case USER_FETCH_PERMISSIONS_SUCCESS: {
+        case USER_FETCH_PERMISSIONS_SUCCESS:
+        case USER_REFRESH_TOKEN_SUCCESS: {
             return {
                 ...state,
                 ...action.payload,
@@ -47,7 +53,9 @@ export function reducer(state: State = INITIAL_STATE, action) {
             };
         }
 
-        case USER_LOGIN_FAIL: {
+        case USER_LOGIN_FAIL:
+        case USER_FETCH_PERMISSIONS_FAIL:
+        case USER_REFRESH_TOKEN_FAIL: {
             return {
                 ...state,
                 loading: false

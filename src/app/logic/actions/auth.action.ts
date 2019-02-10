@@ -5,6 +5,10 @@ export const USER_LOGIN = '[Auth] USER_LOGIN';
 export const USER_LOGIN_SUCCESS = '[Auth] USER_LOGIN_SUCCESS';
 export const USER_LOGIN_FAIL = '[Auth] USER_LOGIN_FAILED';
 
+export const USER_REFRESH_TOKEN = '[Auth] USER_REFRESH_TOKEN';
+export const USER_REFRESH_TOKEN_SUCCESS = '[Auth] USER_REFRESH_TOKEN_SUCCESS';
+export const USER_REFRESH_TOKEN_FAIL = '[Auth] USER_REFRESH_TOKEN_FAILED';
+
 export const USER_FETCH_PERMISSIONS = '[Auth] USER_FETCH_PERMISSIONS';
 export const USER_FETCH_PERMISSIONS_SUCCESS = '[Auth] USER_FETCH_PERMISSIONS_SUCCESS';
 export const USER_FETCH_PERMISSIONS_FAIL = '[Auth] USER_FETCH_PERMISSIONS_FAIL';
@@ -39,6 +43,27 @@ export class UserRestoreSession implements Action {
     readonly type = USER_RESTORE_SESSION;
 
     constructor(public token: Token) {
+    }
+}
+
+export class UserRefreshToken implements Action {
+    readonly type = USER_REFRESH_TOKEN;
+
+    constructor() {
+    }
+}
+
+export class UserRefreshTokenSuccess implements Action {
+    readonly type = USER_REFRESH_TOKEN_SUCCESS;
+
+    constructor(payload: any) {
+    }
+}
+
+export class UserRefreshTokenFail implements Action {
+    readonly type = USER_REFRESH_TOKEN_FAIL;
+
+    constructor(error: any) {
     }
 }
 
@@ -80,4 +105,7 @@ export type Actions =
     | UserFetchPermissionsSuccess
     | UserFetchPermissionsFail
     | UserRestoreSession
-    | UserLogout;
+    | UserLogout
+    | UserRefreshToken
+    | UserRefreshTokenSuccess
+    | UserRefreshTokenFail;

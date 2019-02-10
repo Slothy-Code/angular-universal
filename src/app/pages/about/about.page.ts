@@ -1,8 +1,9 @@
-import {Component, OnInit, AfterViewInit, OnDestroy, NgZone} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnDestroy} from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import * as am4maps from '@amcharts/amcharts4/maps';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldHigh';
+import {HttpClient} from '@angular/common/http';
 
 am4core.useTheme(am4themes_animated);
 
@@ -12,10 +13,11 @@ am4core.useTheme(am4themes_animated);
     styleUrls: ['./about.page.scss']
 })
 
-export class AboutPage implements  AfterViewInit, OnDestroy {
+export class AboutPage implements AfterViewInit, OnDestroy {
     private chart;
 
-    constructor(private zone: NgZone) {}
+    constructor(private zone: NgZone, private httpClient: HttpClient) {
+    }
 
     ngAfterViewInit() {
         this.zone.runOutsideAngular(() => {
