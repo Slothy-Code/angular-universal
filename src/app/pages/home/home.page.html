@@ -3,7 +3,7 @@
         <div fxFlex="20" class="section main-section" fxLayout="column" >
             <button mat-button (click)="logout()" translate>Logout</button>
             <a routerLink="/" translate>back to landpage</a>
-            {{currentUser.name}}
+            {{(user$|async)?.name}}
         </div>
         <div fxFlex="80" class="section primary-section">
             <div class="_container-scroll">

@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '@logic/services/authentication/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '@logic/models/user';
+import {select, Store} from '@ngrx/store';
+import {getCurrentUser} from '@logic/store';
+import {Observable} from 'rxjs';
+import {UserLogout} from '@logic/actions/auth.action';
 
 @Component({
     selector: 'page-home',
@@ -10,20 +13,20 @@ import {User} from '@logic/models/user';
 })
 
 export class HomePage implements OnInit {
-    currentUser: User;
     isLoading: boolean;
+    private user$: Observable<User>;
 
     constructor(private router: Router,
-                private authenticationService: AuthenticationService) {
-        this.currentUser = this.authenticationService.currentUserValue;
+                private store: Store<{}>) {
     }
 
     ngOnInit() {
+        this.user$ = this.store.pipe(select(getCurrentUser));
 
     }
 
     logout() {
-        this.authenticationService.logout();
+        this.store.dispatch(new UserLogout());
         this.router.navigate(['/login']);
     }
 

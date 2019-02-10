@@ -8,5 +8,6 @@ export const environment = {
     production: false,
     serverUrl: 'https://localhost:8080/api',
     defaultLanguage: 'en-US',
-    supportedLanguages: ['en-US', 'fr-FR']
+    supportedLanguages: ['en-US', 'fr-FR'],
+    jwtExpirationTime: 10800
 };
