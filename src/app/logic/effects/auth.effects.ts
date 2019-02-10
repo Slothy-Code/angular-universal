@@ -27,9 +27,9 @@ export class AuthEffects {
     login$: Observable<Action> = this.actions$
         .pipe(ofType(USER_LOGIN),
             mergeMap((action: UserLogin) =>
-                this.authService.login(action.payload, false)
+                this.authService.login(action.payload)
                     .pipe(mergeMap((decodedJWT: any) => [
-                            new UserLoginSuccess(decodedJWT),
+                            new UserLoginSuccess(decodedJWT, action.payload.remember),
                             new UserFetchPermissions()
                         ]),
                         catchError(error => of(new UserLoginFail(error)))
@@ -40,7 +40,9 @@ export class AuthEffects {
     loginSuccess$: Observable<Action> = this.actions$
         .pipe(ofType(USER_LOGIN_SUCCESS),
             tap((action: UserLoginSuccess) => {
-                localStorage.setItem('currentUser', JSON.stringify(action.payload.token));
+                if (action.remember) {
+                    localStorage.setItem('currentUser', JSON.stringify(action.payload.token));
+                }
             }));
 
     @Effect({dispatch: false})

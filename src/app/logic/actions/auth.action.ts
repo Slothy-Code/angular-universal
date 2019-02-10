@@ -17,14 +17,14 @@ export const USER_LOGOUT = '[Auth] USER_LOGOUT';
 export class UserLogin implements Action {
     readonly type = USER_LOGIN;
 
-    constructor(public payload: { password: string, username: string }) {
+    constructor(public payload: { password: string, username: string, remember?: boolean }) {
     }
 }
 
 export class UserLoginSuccess implements Action {
     readonly type = USER_LOGIN_SUCCESS;
 
-    constructor(public payload: any) {
+    constructor(public payload: any, public remember = false) {
     }
 }
 

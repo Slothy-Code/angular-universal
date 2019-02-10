@@ -22,7 +22,7 @@ export class AuthenticationService {
     constructor(private httpClient: HttpClient) {
     }
 
-    login(form: { username: string, password: string }, remember: boolean) {
+    login(form: { username: string, password: string }) {
         return this.httpClient.post<User>(`${environment.serverUrl}/user/login`, form)
             .pipe(map(data => {
                 const decodedJWT: DecodedJWT = this.parseJwt(data.token);

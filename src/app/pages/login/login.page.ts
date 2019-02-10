@@ -29,17 +29,6 @@ export class LoginPage implements OnInit {
     login() {
         this.isLoading = true;
         this.store.dispatch(new UserLogin(this.loginForm.value));
-        // this.authenticationService.login(this.loginForm.value, this.loginForm.value.remember)
-        //     .pipe(first())
-        //     .subscribe(data => {
-        //             this.route.queryParams.subscribe(params =>
-        //                 this.router.navigate([params.redirect || '/home'], { replaceUrl: true })
-        //             );
-        //         },
-        //         error => {
-        //             this.error = error;
-        //             this.isLoading = false;
-        //         });
     }
 
     private createForm() {
