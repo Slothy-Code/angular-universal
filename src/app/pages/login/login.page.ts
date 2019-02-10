@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {finalize, first} from 'rxjs/internal/operators';
-import {AuthenticationService} from '@logic/services/authentication/authentication.service';
 import {I18nService} from '@shared/services/i18n/i18n.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '@env/environment';
+import {Store} from '@ngrx/store';
+import {UserLogin} from '@logic/actions/auth.action';
 
 @Component({
     selector: 'page-login',
@@ -22,23 +22,24 @@ export class LoginPage implements OnInit {
                 private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
                 private i18nService: I18nService,
-                private authenticationService: AuthenticationService) {
+                private store: Store<{}>) {
         this.createForm();
     }
 
     login() {
         this.isLoading = true;
-        this.authenticationService.login(this.loginForm.value, this.loginForm.value.remember)
-            .pipe(first())
-            .subscribe(data => {
-                    this.route.queryParams.subscribe(params =>
-                        this.router.navigate([params.redirect || '/home'], { replaceUrl: true })
-                    );
-                },
-                error => {
-                    this.error = error;
-                    this.isLoading = false;
-                });
+        this.store.dispatch(new UserLogin(this.loginForm.value));
+        // this.authenticationService.login(this.loginForm.value, this.loginForm.value.remember)
+        //     .pipe(first())
+        //     .subscribe(data => {
+        //             this.route.queryParams.subscribe(params =>
+        //                 this.router.navigate([params.redirect || '/home'], { replaceUrl: true })
+        //             );
+        //         },
+        //         error => {
+        //             this.error = error;
+        //             this.isLoading = false;
+        //         });
     }
 
     private createForm() {
