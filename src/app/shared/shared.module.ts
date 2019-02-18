@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {MaterialModule} from '@shared/material.module';
 import {LoaderComponent} from '@components/loader/loader.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {PermissionDirective} from '@logic/directives/permission.directive';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {TranslateModule} from '@ngx-translate/core';
         CommonModule
     ],
     declarations: [
-        LoaderComponent
+        LoaderComponent,
+        PermissionDirective
     ],
     exports: [
         TranslateModule,
@@ -22,6 +24,8 @@ import {TranslateModule} from '@ngx-translate/core';
         LoaderComponent,
         MaterialModule,
         FlexLayoutModule,
+        PermissionDirective
     ]
 })
-export class SharedModule {}
+export class SharedModule {
+}
