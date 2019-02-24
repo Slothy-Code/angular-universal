@@ -3,15 +3,41 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '@env/environment';
 import {Observable} from 'rxjs';
 import {Conversation} from '@logic/models/conversation';
-
+import {EventSourcePolyfill, NativeEventSource} from 'event-source-polyfill';
+import {select, Store} from '@ngrx/store';
+import {getAuthToken} from '@logic/store';
+import {Token} from '@logic/models/token';
 
 @Injectable()
 export class ChatService {
+    headers = {};
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private store: Store<{}>) {
+        this.store.pipe(select(getAuthToken)).subscribe((token: Token) => {
+            this.headers = {Authorization: `Bearer ${token.token}`};
+        });
     }
 
     public getConversations(): Observable<Conversation[]> {
         return this.httpClient.get<Conversation[]>(environment.serverUrl + '/chat/conversations');
+    }
+
+    public listen(): Observable<any> {
+        return Observable.create(observer => {
+            const eventSource = new EventSourcePolyfill(`${environment.serverUrl}/chat/listen`, {'headers': this.headers});
+
+            eventSource.addEventListener('message', event => {
+                observer.next(JSON.parse(event.data));
+            });
+
+            eventSource.addEventListener('error', (error) => {
+                if (eventSource.readyState === 0) {
+                    eventSource.close();
+                    observer.complete();
+                } else {
+                    observer.error(JSON.parse(error));
+                }
+            });
+        });
     }
 }

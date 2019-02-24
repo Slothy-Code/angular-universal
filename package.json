@@ -62,7 +62,9 @@
     "reflect-metadata": "^0.1.10",
     "rxjs": "6.3.3",
     "spdy": "^4.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "normalizr": "^3.3.0",
+    "event-source-polyfill": "^1.0.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.11.4",
