@@ -12,6 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log(request);
         return this.store.pipe(
             select(getAuthToken),
             first(),

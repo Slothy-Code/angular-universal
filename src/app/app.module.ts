@@ -13,6 +13,7 @@ const routes = [
     data: {title: extract('Login')}, canActivate: [AuthenticationGuard, PermissionGuard.forPermission('user.test')]
   },
   { path: 'about', loadChildren: './pages/about/about.module#AboutModule', data: { title: extract('About') }},
+  {path: 'chat', loadChildren: './pages/chat/chat.module#ChatModule', data: {title: extract('Chat')}},
 ]
 
 @NgModule({
