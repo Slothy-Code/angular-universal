@@ -4,7 +4,13 @@ import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {ChatService} from '@logic/services/chat/chat.service';
-import {FETCH_CONVERSATIONS, FetchConversationsFail, FetchConversationsSuccess, InsertMessages} from '@logic/actions/chat.action';
+import {
+    FETCH_CONVERSATIONS,
+    FetchConversationsFail,
+    FetchConversationsSuccess,
+    FetchMessagesSuccess,
+    FetchUsersSuccess,
+} from '@logic/actions/chat.action';
 import {Conversation} from '@logic/models/conversation';
 import {conversationNormalize} from '@logic/normalization/conversation.normalize';
 
@@ -19,7 +25,8 @@ export class ChatEffects {
                     .pipe(mergeMap((conversations: Conversation[]) => {
                             const data = conversationNormalize(conversations).entities;
                             return [
-                                new InsertMessages(Object.values(data.messages)),
+                                new FetchUsersSuccess(Object.values(data.users)),
+                                new FetchMessagesSuccess(Object.values(data.messages)),
                                 new FetchConversationsSuccess(Object.values(data.conversations))
                             ];
                         }),

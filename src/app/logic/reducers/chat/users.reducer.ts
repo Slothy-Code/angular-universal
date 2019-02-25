@@ -1,13 +1,13 @@
-import {INSERT_MESSAGES} from '../../actions/chat.action';
+import {FETCH_USERS_SUCCESS} from '../../actions/chat.action';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Message} from '@logic/models/message';
+import {User} from '@logic/models/user';
 
-export interface State extends EntityState<Message> {
+export interface State extends EntityState<User> {
     loading: boolean;
 }
 
-export const adapter: EntityAdapter<Message> = createEntityAdapter<Message>({
-    selectId: (message: Message) => message._id
+export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
+    selectId: (user: User) => user._id
 });
 
 export const INITIAL_STATE: State = adapter.getInitialState({
@@ -17,7 +17,7 @@ export const INITIAL_STATE: State = adapter.getInitialState({
 export function reducer(state: State = INITIAL_STATE, action) {
     switch (action.type) {
 
-        case INSERT_MESSAGES: {
+        case FETCH_USERS_SUCCESS: {
             return {
                 ...adapter.addMany(action.payload, state),
                 loading: false
@@ -30,3 +30,14 @@ export function reducer(state: State = INITIAL_STATE, action) {
     }
 }
 
+const {
+    selectIds,
+    selectEntities,
+    selectAll,
+    selectTotal,
+} = adapter.getSelectors();
+
+export const selectUserIds = selectIds;
+export const selectUserEntities = selectEntities;
+export const selectAllUsers = selectAll;
+export const selectUsersTotal = selectTotal;

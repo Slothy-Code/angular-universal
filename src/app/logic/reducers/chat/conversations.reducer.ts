@@ -44,4 +44,14 @@ export function reducer(state: State = INITIAL_STATE, action) {
     }
 }
 
-export const getAllConversations = (state) => state.conversations;
+const {
+    selectIds,
+    selectEntities,
+    selectAll,
+    selectTotal,
+} = adapter.getSelectors();
+
+export const selectConversationIds = selectIds;
+export const selectConversationEntities = selectEntities;
+export const selectAllConversations = selectAll;
+export const selectConversationsTotal = selectTotal;
