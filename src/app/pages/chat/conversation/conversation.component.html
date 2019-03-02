@@ -1,0 +1,7 @@
+<div *ngIf="(conversation$| async) as conversation">
+    <ul>
+        <li *ngFor="let message of conversation.messages">
+            co{{message.sender.name}}: {{message.text}}
+        </li>
+    </ul>
+</div>

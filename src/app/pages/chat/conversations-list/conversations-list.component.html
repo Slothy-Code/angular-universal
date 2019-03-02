@@ -1,0 +1,6 @@
+<ul>
+    <li (click)="selectConversation(conversation)" *ngFor="let conversation of conversations$ | async">
+        {{conversation.users | json}}
+        {{conversation.messages.slice(-1)[0].sender.name}}: {{conversation.messages.slice(-1)[0].text}}
+    </li>
+</ul>

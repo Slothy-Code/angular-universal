@@ -26,6 +26,7 @@ export const getUsersState = createSelector(getChatState, state => state.users);
 const getAllMessageEntities = createSelector(getMessagesState, fromMessages.selectMessageEntities);
 const getAllUserEntities = createSelector(getUsersState, fromUsers.selectUserEntities);
 const getAllConversationEntities = createSelector(getConversationsState, fromConversations.selectConversationEntities);
+const getSelectedConversationId = createSelector(getConversationsState, fromConversations.getSelectedId);
 
 export const getAllConversations = createSelector(getAllUserEntities, getAllMessageEntities, getAllConversationEntities,
     (users, messages, conversations) => {
@@ -34,5 +35,9 @@ export const getAllConversations = createSelector(getAllUserEntities, getAllMess
     });
 
 export const getConversationById = (id: string) => createSelector(getAllConversations, (conversations) => {
+    return conversations.find(conversation => conversation._id === id);
+});
+
+export const getSelectedConversation = createSelector(getSelectedConversationId, getAllConversations, (id, conversations) => {
     return conversations.find(conversation => conversation._id === id);
 });

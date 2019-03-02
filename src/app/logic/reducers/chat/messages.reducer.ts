@@ -1,4 +1,4 @@
-import {FETCH_MESSAGES_SUCCESS} from '../../actions/chat.action';
+import {FETCH_MESSAGES_SUCCESS, RECEIVE_MESSAGE} from '../../actions/chat.action';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Message} from '@logic/models/message';
 
@@ -22,6 +22,10 @@ export function reducer(state: State = INITIAL_STATE, action) {
                 ...adapter.addMany(action.payload, state),
                 loading: false
             };
+        }
+
+        case RECEIVE_MESSAGE: {
+            return adapter.addOne(action.payload, state);
         }
 
         default: {

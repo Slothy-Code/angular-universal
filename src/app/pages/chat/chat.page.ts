@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {getConversationById} from '@logic/chat-store';
-import {FetchConversations} from '@logic/actions/chat.action';
-import {ChatService} from '@logic/services/chat/chat.service';
+import {Store} from '@ngrx/store';
+import {ListenToChat} from '@logic/actions/chat.action';
 
 
 @Component({
@@ -12,19 +10,11 @@ import {ChatService} from '@logic/services/chat/chat.service';
 })
 
 export class ChatPage implements OnInit {
-
-    constructor(private chatService: ChatService, private store: Store<{}>) {
+    constructor(private store: Store<{}>) {
     }
 
     ngOnInit(): void {
-        this.store.dispatch(new FetchConversations());
-        this.chatService.listen().subscribe(data => {
-            console.log(data);
-        });
-
-        this.store.pipe(select(getConversationById('5c729a331d21403bb456d12e'))).subscribe(data => {
-            console.log(data);
-        });
+        this.store.dispatch(new ListenToChat());
     }
 
 }

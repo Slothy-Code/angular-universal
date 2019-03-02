@@ -22,7 +22,11 @@ export class ChatService {
         return this.httpClient.get<Conversation[]>(environment.serverUrl + '/chat/conversations');
     }
 
-    public listen(): Observable<any> {
+    public getConversation(id: string, page = 1): Observable<Conversation> {
+        return this.httpClient.get<Conversation>(`${environment.serverUrl}/chat/conversations/${id}?page=${page}`);
+    }
+
+    public listen(): Observable<Conversation> {
         return Observable.create(observer => {
             const eventSource = new EventSourcePolyfill(`${environment.serverUrl}/chat/listen`, {'headers': this.headers});
 
@@ -32,9 +36,9 @@ export class ChatService {
 
             eventSource.addEventListener('error', (error) => {
                 if (eventSource.readyState === 0) {
-                    eventSource.close();
-                    observer.complete();
+                    console.log('reconnect');
                 } else {
+                    console.log('error');
                     observer.error(JSON.parse(error));
                 }
             });
