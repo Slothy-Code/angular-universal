@@ -9,6 +9,10 @@ export const FETCH_CONVERSATIONS = '[Chat] FETCH_CONVERSATIONS';
 export const FETCH_CONVERSATIONS_SUCCESS = '[Chat] FETCH_CONVERSATIONS_SUCCESS';
 export const FETCH_CONVERSATIONS_FAIL = '[Chat] FETCH_CONVERSATIONS_FAILED';
 
+export const CREATE_CONVERSATION = '[Chat] CREATE_CONVERSATION';
+export const CREATE_CONVERSATION_SUCCESS = '[Chat] CREATE_CONVERSATION_SUCCESS';
+export const CREATE_CONVERSATION_FAIL = '[Chat] CREATE_CONVERSATION_FAIL';
+
 export const SEND_MESSAGE = '[Chat] SEND_MESSAGE';
 export const SEND_MESSAGE_SUCCESS = '[Chat] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Chat] SEND_MESSAGE_FAIL';
@@ -118,6 +122,28 @@ export class SendMessageFail implements Action {
 
 }
 
+export class CreateConversation implements Action {
+    readonly type = CREATE_CONVERSATION;
+
+    constructor(public userIds: string[]) {
+    }
+}
+
+export class CreateConversationSuccess implements Action {
+    readonly type = CREATE_CONVERSATION_SUCCESS;
+
+    constructor(public payload: Conversation) {
+    }
+}
+
+export class CreateConversationFail implements Action {
+    readonly type = CREATE_CONVERSATION_FAIL;
+
+    constructor(public error: any) {
+    }
+}
+
+
 export type Actions =
     ListenToChat
     | FetchConversations
@@ -130,5 +156,8 @@ export type Actions =
     | SelectConversation
     | SendMessage
     | SendMessageSuccess
-    | SendMessageFail;
+    | SendMessageFail
+    | CreateConversation
+    | CreateConversationFail
+    | CreateConversationSuccess;
 

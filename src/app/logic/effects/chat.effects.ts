@@ -5,6 +5,10 @@ import {Action} from '@ngrx/store';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {ChatService} from '@logic/services/chat/chat.service';
 import {
+    CREATE_CONVERSATION,
+    CreateConversation,
+    CreateConversationFail,
+    CreateConversationSuccess,
     FETCH_CONVERSATIONS,
     FETCH_MESSAGES,
     FetchConversationsFail,
@@ -88,16 +92,23 @@ export class ChatEffects {
         );
 
     @Effect()
-    sendMessage$: Observable<Action> = this.actions$
+    sendMessage$ = this.actions$
         .pipe(ofType(SEND_MESSAGE),
-            mergeMap((action: SendMessage) => {
-                return this.chatService.sendMessage(action.conversation, action.message)
-                    .pipe(mergeMap((conversation: Conversation) => {
-                            console.log(conversation);
-                            return [];
-                        }),
-                        catchError((error => of(new SendMessageFail(error)))));
-            }));
+            map((action: SendMessage) =>
+                this.chatService.sendMessage(action.conversation, action.message)
+                    .pipe(catchError((error => of(new SendMessageFail(error)))))
+            ));
+
+    @Effect()
+    createConversation: Observable<Action> = this.actions$
+        .pipe(ofType(CREATE_CONVERSATION),
+            mergeMap((action: CreateConversation) =>
+                this.chatService.createConversation(action.userIds)
+                    .pipe(map((conversation: Conversation) => new CreateConversationSuccess(conversation)),
+                        catchError(error => of(new CreateConversationFail(error)))
+                    ))
+        );
+
 
     constructor(private actions$: Actions, private chatService: ChatService) {
     }

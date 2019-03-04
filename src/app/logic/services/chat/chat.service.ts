@@ -26,11 +26,15 @@ export class ChatService {
         return this.httpClient.get<Conversation>(`${environment.serverUrl}/chat/conversations/${id}?page=${page}`);
     }
 
-    public sendMessage(conversation: Conversation, message: string) {
+    public sendMessage(conversation: Conversation, message: string): Observable<Conversation> {
         return this.httpClient.post<Conversation>(`${environment.serverUrl}/chat/send-message`, {
             conversation: conversation._id,
             text: message
         });
+    }
+
+    public createConversation(userIds: string[]): Observable<Conversation> {
+        return this.httpClient.post<Conversation>(environment.serverUrl + '/chat/conversations', {userIds});
     }
 
     public listen(): Observable<Conversation> {
@@ -51,4 +55,5 @@ export class ChatService {
             });
         });
     }
+
 }

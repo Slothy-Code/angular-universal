@@ -1,5 +1,8 @@
 import {Conversation} from '../../models/conversation';
 import {
+    CREATE_CONVERSATION,
+    CREATE_CONVERSATION_FAIL,
+    CREATE_CONVERSATION_SUCCESS,
     FETCH_CONVERSATIONS,
     FETCH_CONVERSATIONS_FAIL,
     FETCH_CONVERSATIONS_SUCCESS,
@@ -49,9 +52,13 @@ export function reducer(state: State = INITIAL_STATE, action) {
         }
 
         case UPDATE_CONVERSATION_SUCCESS: {
-            const storeConversation = {...state.entities[action.payload._id]};
-            const messagesSet = new Set([...storeConversation.messages, ...action.payload.messages]);
-            const conversation = {...action.payload, messages: Array.from(messagesSet)};
+            const storeConversation = state.entities[action.payload._id];
+            let conversation = action.payload;
+
+            if (storeConversation) {
+                const messagesSet = new Set([...storeConversation.messages, ...action.payload.messages]);
+                conversation = {...action.payload, messages: Array.from(messagesSet)};
+            }
             return {
                 ...adapter.upsertOne(conversation, state)
             };
@@ -68,6 +75,28 @@ export function reducer(state: State = INITIAL_STATE, action) {
             return {
                 ...state,
                 selected: action.payload._id
+            };
+        }
+
+        case CREATE_CONVERSATION: {
+            return {
+                ...state,
+                loading: true
+            };
+        }
+
+        case CREATE_CONVERSATION_SUCCESS: {
+            return {
+                ...adapter.addOne(action.payload, state),
+                loading: false,
+            };
+        }
+
+        case CREATE_CONVERSATION_FAIL: {
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
         }
 
