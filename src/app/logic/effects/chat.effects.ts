@@ -23,6 +23,7 @@ import {
     SEND_MESSAGE,
     SendMessage,
     SendMessageFail,
+    SendMessageSuccess,
     UpdateConversationSuccess,
 } from '@logic/actions/chat.action';
 import {Conversation} from '@logic/models/conversation';
@@ -92,11 +93,12 @@ export class ChatEffects {
         );
 
     @Effect()
-    sendMessage$ = this.actions$
+    sendMessage$: Observable<Action> = this.actions$
         .pipe(ofType(SEND_MESSAGE),
-            map((action: SendMessage) =>
+            mergeMap((action: SendMessage) =>
                 this.chatService.sendMessage(action.conversation, action.message)
-                    .pipe(catchError((error => of(new SendMessageFail(error)))))
+                    .pipe(map((conversation: Conversation) => new SendMessageSuccess(conversation)),
+                        catchError((error => of(new SendMessageFail(error)))))
             ));
 
     @Effect()
