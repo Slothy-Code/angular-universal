@@ -9,6 +9,10 @@ export const FETCH_CONVERSATIONS = '[Chat] FETCH_CONVERSATIONS';
 export const FETCH_CONVERSATIONS_SUCCESS = '[Chat] FETCH_CONVERSATIONS_SUCCESS';
 export const FETCH_CONVERSATIONS_FAIL = '[Chat] FETCH_CONVERSATIONS_FAILED';
 
+export const SEND_MESSAGE = '[Chat] SEND_MESSAGE';
+export const SEND_MESSAGE_SUCCESS = '[Chat] SEND_MESSAGE_SUCCESS';
+export const SEND_MESSAGE_FAIL = '[Chat] SEND_MESSAGE_FAIL';
+
 export const UPDATE_CONVERSATION_SUCCESS = '[Chat] UPDATE_CONVERSATION_SUCCESS';
 
 export const FETCH_MESSAGES = '[Chat] FETCH_MESSAGES';
@@ -91,6 +95,29 @@ export class SelectConversation implements Action {
 
 }
 
+export class SendMessage implements Action {
+    readonly type = SEND_MESSAGE;
+
+    constructor(public conversation: Conversation, public message: string) {
+    }
+}
+
+export class SendMessageSuccess implements Action {
+    readonly type = SEND_MESSAGE_SUCCESS;
+
+    constructor(public payload: Conversation) {
+    }
+
+}
+
+export class SendMessageFail implements Action {
+    readonly type = SEND_MESSAGE_FAIL;
+
+    constructor(public error: any) {
+    }
+
+}
+
 export type Actions =
     ListenToChat
     | FetchConversations
@@ -100,5 +127,8 @@ export type Actions =
     | FetchUsersSuccess
     | UpdateConversationSuccess
     | ReceiveMessage
-    | SelectConversation;
+    | SelectConversation
+    | SendMessage
+    | SendMessageSuccess
+    | SendMessageFail;
 

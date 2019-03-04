@@ -1,7 +1,12 @@
 <div *ngIf="(conversation$| async) as conversation">
     <ul>
         <li *ngFor="let message of conversation.messages">
-            co{{message.sender.name}}: {{message.text}}
+            {{message.sender.name}}: {{message.text}}
         </li>
     </ul>
+
+    <form (ngSubmit)="sendMessage()" [formGroup]="form">
+        <input formControlName="message" type="text">
+
+    </form>
 </div>

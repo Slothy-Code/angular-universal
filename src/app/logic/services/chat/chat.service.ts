@@ -26,6 +26,13 @@ export class ChatService {
         return this.httpClient.get<Conversation>(`${environment.serverUrl}/chat/conversations/${id}?page=${page}`);
     }
 
+    public sendMessage(conversation: Conversation, message: string) {
+        return this.httpClient.post<Conversation>(`${environment.serverUrl}/chat/send-message`, {
+            conversation: conversation._id,
+            text: message
+        });
+    }
+
     public listen(): Observable<Conversation> {
         return Observable.create(observer => {
             const eventSource = new EventSourcePolyfill(`${environment.serverUrl}/chat/listen`, {'headers': this.headers});
