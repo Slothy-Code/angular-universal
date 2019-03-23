@@ -17,3 +17,4 @@ firebug-lite.tar.tgz
 /coverage
 
 /functions/node_modules/
+/functions/dist/

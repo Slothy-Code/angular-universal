@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -9,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
     ],
     imports: [
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
         // PrebootModule.withConfig({appRoot: 'app-root'})
       ],
       providers: [],
