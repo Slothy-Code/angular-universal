@@ -4,16 +4,15 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": [
-      "node"
-    ]
+    "types": []
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts",
-    "**/*.mock.ts"
+    "**/*.spec.ts"
   ],
-  "angularCompilerOptions": {
-    "preserveWhitespaces": true
-  }
+  "include": [
+    "main.browser.ts",
+    "polyfills.ts"
+//    "./app/lazy/lazy.module.ts"
+  ]
 }

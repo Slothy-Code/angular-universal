@@ -1,29 +1,18 @@
-import {NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
-import {RouterModule} from '@angular/router';
-import {CoreModule} from '@shared/core.module';
-import {extract} from '@shared/services/i18n/i18n.service';
-import {PermissionGuard} from '@shared/guards/permission/permission.guard';
-import {AuthenticationGuard} from '@shared/guards/authentication/authentication.guard';
-
-const routes = [
-  { path: '', loadChildren: './pages/landpage/landpage.module#LandpageModule', data: { title: extract('Landpage') }},
-  { path: 'login', loadChildren: './pages/login/login.module#LoginModule', data: { title: extract('Login') }},
-  { path: 'home', loadChildren: './pages/home/home.module#HomeModule',
-    data: {title: extract('Login')}, canActivate: [AuthenticationGuard, PermissionGuard.forPermission('user.test')]
-  },
-  { path: 'about', loadChildren: './pages/about/about.module#AboutModule', data: { title: extract('About') }},
-]
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    CoreModule,
-    RouterModule.forRoot(routes)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        CommonModule,
+        HttpClientModule
+        // PrebootModule.withConfig({appRoot: 'app-root'})
+      ],
+      providers: [],
+      bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,72 @@
+{
+  "configVersion": 1,
+  "appData": {
+    "name": "Angular Universal PWA",
+    "description": "Angular PWA with Server Side Rendering - starter"
+  },
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/index.html",
+        "/main.a17b86822d040b1e8a33.js",
+        "/polyfills.69dbdf890f466bf05955.js",
+        "/runtime.26209474bfa8dc87a77c.js",
+        "/styles.b4b80434d78e1822ebf2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/img/background.png",
+        "/assets/img/lighthouse_report.png"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "fonts",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
+        "https:\\/\\/fonts\\.gstatic\\.com\\/.*",
+        "https:\\/\\/cdn\\.ampproject\\.org\\/.*"
+      ]
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/img/background.png": "72664572a5ec9488d53b59598b7dc023d34718e2",
+    "/assets/img/lighthouse_report.png": "3341cab8c1bf857a12411040f35f6354197e2c96",
+    "/index.html": "6cef6bb1cab9fdc6a42252618e75dd4abbe236f3",
+    "/main.a17b86822d040b1e8a33.js": "e481cb29e717bb29f04fcdb7e44e8046cf80d021",
+    "/polyfills.69dbdf890f466bf05955.js": "0e17690fbdf65a25529adbcc7d12965ec6a934ed",
+    "/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/styles.b4b80434d78e1822ebf2.css": "a78ad1552644abbbf02f7a19c2a20529d2724d2b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

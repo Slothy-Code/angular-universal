@@ -1,0 +1,13 @@
+{
+  "serverless": {
+    "skipInstall": true,
+    "project": "travelBlog",
+    "firebaseProject": "allineedistravel-8582f",
+    "provider": "firebase",
+    "directory": "travelBlog",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}

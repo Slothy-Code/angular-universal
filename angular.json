@@ -3,32 +3,51 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-universal-demo": {
+    "travelBlog": {
       "root": "",
+      "sourceRoot": "src",
       "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/browser",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "main": "src/main.browser.ts",
             "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/apple-touch-icon.png",
-              "src/robots.txt",
-              "src/manifest.json",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "manifest.json",
+                "input": "src",
+                "output": "/"
+              },
+              {
+                "glob": "ngsw-worker.js",
+                "input": "src/assets/fakeSW",
+                "output": "/"
+              }
             ],
             "styles": [
-              "src/main.scss"
+              {
+                "input": "src/styles/main.scss"
+              }
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -38,58 +57,64 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "serviceWorker": true,
-              "fileReplacements": [
+              "budgets": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-universal-demo:build"
+            "browserTarget": "travelBlog:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "ng-universal-demo:build:production"
+            "dev": {
+              "browserTarget": "travelBlog:build:dev"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-universal-demo:build"
+            "browserTarget": "travelBlog:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
+            "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/main.scss"
+              {
+                "input": "src/styles/main.scss"
+              }
             ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/apple-touch-icon.png",
-              "src/robots.txt",
-              "src/manifest.json",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "manifest.json",
+                "input": "src",
+                "output": "/"
+              }
             ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
-          "options": {            
+          "options": {
             "tsConfig": [
-              "src/tsconfig.app.json", "src/tsconfig.spec.json"
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -102,72 +127,37 @@
             "outputPath": "dist/server",
             "main": "src/main.server.ts",
             "tsConfig": "src/tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
-            }
           }
         }
       }
     },
-    "ng-universal-demo-e2e": {
-      "root": "",
+    "travelBlog-e2e": {
+      "root": "e2e/",
       "projectType": "application",
-      "cli": {},
-      "schematics": {},
+      "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ng-universal-demo:serve"
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "travelBlog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "travelBlog:serve:production"
+            }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [],
+            "tsConfig": "e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]
           }
         }
       }
-    }
-  },
-  "cli": {},
-  "schematics": {
-    "@schematics/angular:class": {
-      "spec": false
-    },
-    "@schematics/angular:component": {
-      "spec": false,
-      "inlineStyle": true,
-      "inlineTemplate": true,
-      "prefix": "app",
-      "styleext": "scss"
-    },
-    "@schematics/angular:directive": {
-      "spec": false,
-      "prefix": "app"
-    },
-    "@schematics/angular:guard": {
-      "spec": false
-    },
-    "@schematics/angular:module": {
-      "spec": false
-    },
-    "@schematics/angular:pipe": {
-      "spec": false
-    },
-    "@schematics/angular:service": {
-      "spec": false
     }
   }
 }

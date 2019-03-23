@@ -1,31 +1,19 @@
-.idea
-.DS_Store
-.vscode
-
-package-lock.json
-
-# Built #
-/__build__/
-/__server_build__/
 /node_modules/
-/typings/
-/tsd_typings/
 /dist/
-/dist-server/
-/compiled/
-
-# Node #
+/lib/
+/yarn.lock
 *.log
-/npm-debug.log.*
+.idea
+.serverless
+*.iml
+*.js.map
+*.d.ts
+.DS_Store
+dll
+.awcache
+/src/styles/main.css
+/firebug-lite
+firebug-lite.tar.tgz
+/coverage
 
-# Webpack #
-webpack.records.json
-
-# Angular #
-*.ngfactory.ts
-*.css.shim.ts
-*.ngsummary.json
-*.metadata.json
-*.shim.ngstyle.ts
-
-/out-tsc
+/functions/node_modules/
